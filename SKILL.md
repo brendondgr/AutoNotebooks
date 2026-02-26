@@ -5,7 +5,7 @@ description: A semi-skill for parallelized NotebookLM notebook creation and arti
 
 ## ⚠️ Critical Rule: No Code Modifications
 
-The automation engine (`run.py` and `utils/`) is a finalized, robust system that supports **ALL** NotebookLM features through its configuration schema.
+The automation engine (`nlm_runner.py` and `utils/`) is a finalized, robust system that supports **ALL** NotebookLM features through its configuration schema.
 **As an AI agent, you MUST NOT modify any Python code in this directory.**
 
 Your sole responsibility is to:
@@ -44,9 +44,9 @@ Consolidate the plan and ask for user confirmation.
 
 1.  **Create Config Directory**: `NotebookAutomation/config/`.
 2.  **Write Config**: `config_<timestamp>.json` following the `PipelineConfig` schema in `utils/config.py`.
-3.  **Run Pipeline**: Execute **strictly** using the `--config` flag:
+3.  **Run Pipeline**: Locate `nlm_runner.py` (check root or `.agent/rules/`) and execute **strictly** using the `--config` flag:
     ```bash
-    uv run python run.py --config config/config_<timestamp>.json
+    uv run python [path/to/]nlm_runner.py --config config/config_<timestamp>.json
     ```
 
 ## Advanced Config Schema Reference

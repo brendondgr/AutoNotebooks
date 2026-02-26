@@ -4,29 +4,40 @@ Create AI-powered **NotebookLM** notebooks and learning materials (audio, slides
 
 ## How to Use
 
-Simply provide this command to an Agent (Like Claude, Cursor, or Antigravity):
+Follow these steps to generate notebooks automatically:
 
-> **"Create me a series of Notebooks on the following topics: [Insert Topics List]"**
+1. **Clone the repository** (if you haven't):
+   ```bash
+   git clone https://github.com/brendondgr/AutoNotebooks.git
+   cd AutoNotebooks
+   ```
+2. **Open the project** in your AI assistant (e.g., Claude Code, Cursor, or Antigravity).
+3. **Reference the Skill**: Reference `@SKILL.md` in your prompt and say:
 
-That's it! The Agent will handle everything for you—creating notebooks, researching topics, and generating all the learning materials you need.
+   > **"Following @SKILL.md, create me a series of Notebooks on the following topics: [Insert Topics List]"**
+
+The agent will follow the orchestration logic in `SKILL.md` to create notebooks, research topics, and generate artifacts automatically.
 
 ### Example Commands
 
 **Simple:**
+
 ```
-Create me notebooks on: Python Basics, Data Structures, and Machine Learning
+Following @SKILL.md, create me notebooks on: Python Basics, Data Structures, and Machine Learning
 ```
 
 **With preferences:**
+
 ```
-Create me notebooks on: Cell Biology and Photosynthesis. 
+Following @SKILL.md, create me notebooks on: Cell Biology and Photosynthesis.
 I'd like audio explanations and slides for each one, plus a quiz.
 Use fast research mode.
 ```
 
 **More detailed:**
+
 ```
-Create me the following notebooks:
+Following @SKILL.md, create me the following notebooks:
 - Python Fundamentals (with audio dialogue and flashcards)
 - Advanced Python (with slides and a quiz)
 
@@ -41,7 +52,7 @@ The LLM will automatically:
 ✅ Research and populate your notebooks with relevant information  
 ✅ Generate the artifacts you request (audio, slides, quizzes, flashcards, etc.)  
 ✅ Download everything locally for you  
-✅ Show real-time progress in your terminal  
+✅ Show real-time progress in your terminal
 
 ## Available Learning Materials
 
@@ -65,7 +76,60 @@ You only need to set up once:
    ```bash
    uv sync
    ```
-   
+
+## Using as an AI Skill
+
+This repository includes a `SKILL.md` document loaded with YAML front-matter and explicit instructions on the NotebookLM automation workflow. You can easily integrate this into your preferred AI assistant so it inherently understands how to generate notebooks for you!
+
+### Google Antigravity
+
+Antigravity natively supports the `SKILL.md` standard. The agent will automatically discover and parse the `SKILL.md` file in the repository to extend its capabilities.
+
+- **Recommended**: Copy to the specific agent rules folder:
+  ```bash
+  mkdir -p .agent/rules
+  cp SKILL.md .agent/rules/notebook-automation.md
+  ```
+- **Portable (Self-Contained)**: You can also move the logic into the rule folder for a cleaner root:
+  ```bash
+  mkdir -p .agent/rules
+  cp -r nlm_runner.py utils/ SKILL.md .agent/rules/
+  ```
+
+### Cursor
+
+Cursor uses Markdown Domain Configuration (`.mdc`) and rule files to understand project context. To integrate this skill:
+
+- **Recommended**: Copy it into Cursor's rules directory so it applies automatically:
+  ```bash
+  mkdir -p .cursor/rules
+  cp SKILL.md .cursor/rules/notebook-automation.mdc
+  ```
+- **Portable (Self-Contained)**: Bundle the automation logic inside Cursor's rule directory:
+  ```bash
+  mkdir -p .cursor/rules
+  cp -r nlm_runner.py utils/ SKILL.md .cursor/rules/
+  mv .cursor/rules/SKILL.md .cursor/rules/notebook-automation.mdc
+  ```
+- **Quick Use**: Simply tag `@SKILL.md` in your Cursor Chat.
+
+### Claude Code
+
+Claude Code uses a `CLAUDE.md` file in the project directory for its primary memory and project guidelines. To integrate:
+
+- **Recommended**: Copy the skill to be Claude's default project instructions:
+  ```bash
+  mkdir -p .claude
+  cp SKILL.md .claude/CLAUDE.md
+  ```
+- **Portable (Self-Contained)**: Bundle the logic directly inside the `.claude/` folder:
+  ```bash
+  mkdir -p .claude
+  cp -r nlm_runner.py utils/ SKILL.md .claude/
+  mv .claude/SKILL.md .claude/CLAUDE.md
+  ```
+- **Alternative**: Reference the file in your prompt directly (e.g., _"Following @SKILL.md, create me a notebook..."_).
+
 ## Features
 
 - **Fast & Parallel** - Creates multiple notebooks simultaneously
