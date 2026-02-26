@@ -4,11 +4,11 @@ Create AI-powered **NotebookLM** notebooks and learning materials (audio, slides
 
 ## How to Use
 
-Simply provide this command to an LLM (like Claude, ChatGPT, or any AI assistant):
+Simply provide this command to an Agent (Like Claude, Cursor, or Antigravity):
 
 > **"Create me a series of Notebooks on the following topics: [Insert Topics List]"**
 
-That's it! The LLM will handle everything for you—creating notebooks, researching topics, and generating all the learning materials you need.
+That's it! The Agent will handle everything for you—creating notebooks, researching topics, and generating all the learning materials you need.
 
 ### Example Commands
 
@@ -65,15 +65,7 @@ You only need to set up once:
    ```bash
    uv sync
    ```
-
-2. **Add your NotebookLM credentials** to a `.env` file in the project folder:
-   ```
-   NOTEBOOKLM_USERNAME=your_username
-   NOTEBOOKLM_PASSWORD=your_password
-   ```
-
-That's it! From now on, just tell an LLM what notebooks you want and it will create them for you.
-
+   
 ## Features
 
 - **Fast & Parallel** - Creates multiple notebooks simultaneously
