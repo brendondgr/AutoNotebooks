@@ -18,6 +18,15 @@ Your sole responsibility is to:
 
 ## Workflow: Back-and-Forth Planning
 
+### Phase 0: Ensure Requirements are Setup
+
+You will need to ensure the user has two python libraries available: notebooklm-mcp and rich.
+
+- If you are running in an environment where you can execute commands, run:
+  ```bash
+  uv sync
+  ```
+
 Before generating any files or running the automation, you must gather all necessary details from the user.
 
 ### Phase 1: Requirement Gathering
