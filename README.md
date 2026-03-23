@@ -1,6 +1,8 @@
 # AutoNotebooks
 
-Create AI-powered **NotebookLM** notebooks and learning materials (audio, slides, quizzes, flashcards, and more) by simply telling an LLM what you want.
+Create notebooks automatically by simply requesting them in your console.
+
+Ask your local agent to create you Notebooks on specific topics and it will carry out creating however many you request, along with conducting Research, creation of Artifacts and downloading directly to your local repository. 
 
 ## How to Use
 
@@ -12,9 +14,9 @@ Follow these steps to generate notebooks automatically:
    cd AutoNotebooks
    ```
 2. **Open the project** in your AI assistant (e.g., Claude Code, Cursor, or Antigravity).
-3. **Reference the Skill**: Reference `@SKILL.md` in your prompt and say:
+3. **Reference the Skill**: Reference `AutoNotebooks` in your prompt and say:
 
-   > **"Following @SKILL.md, create me a series of Notebooks on the following topics: [Insert Topics List]"**
+   > **"Following AutoNotebooks Skill, create me a series of Notebooks on the following topics: [Insert Topics List]"**
 
 The agent will follow the orchestration logic in `SKILL.md` to create notebooks, research topics, and generate artifacts automatically.
 
@@ -23,13 +25,13 @@ The agent will follow the orchestration logic in `SKILL.md` to create notebooks,
 **Simple:**
 
 ```
-Following @SKILL.md, create me notebooks on: Python Basics, Data Structures, and Machine Learning
+Following AutoNotebooks skill, create me notebooks on: Python Basics, Data Structures, and Machine Learning
 ```
 
 **With preferences:**
 
 ```
-Following @SKILL.md, create me notebooks on: Cell Biology and Photosynthesis.
+Following AutoNotebooks skill, create me notebooks on: Cell Biology and Photosynthesis.
 I'd like audio explanations and slides for each one, plus a quiz.
 Use fast research mode.
 ```
@@ -37,7 +39,7 @@ Use fast research mode.
 **More detailed:**
 
 ```
-Following @SKILL.md, create me the following notebooks:
+Following AutoNotebooks skill, create me the following notebooks:
 - Python Fundamentals (with audio dialogue and flashcards)
 - Advanced Python (with slides and a quiz)
 
@@ -48,11 +50,13 @@ Use deep research mode and include relevant online sources.
 
 The LLM will automatically:
 
-✅ Create NotebookLM notebooks for each topic  
-✅ Research and populate your notebooks with relevant information  
-✅ Generate the artifacts you request (audio, slides, quizzes, flashcards, etc.)  
-✅ Download everything locally for you  
-✅ Show real-time progress in your terminal
+- Create NotebookLM notebooks for each topic  
+- Research and populate your notebooks with relevant information  
+- Generate the artifacts you request (audio, slides, quizzes, flashcards, etc.)  
+- Download everything locally for you  
+- Show real-time progress in your terminal
+
+You can then integrate this into a local HTML to see everything live.
 
 ## Available Learning Materials
 
@@ -79,7 +83,36 @@ You only need to set up once:
 
 ## Using as an AI Skill
 
-This repository includes a `SKILL.md` document loaded with YAML front-matter and explicit instructions on the NotebookLM automation workflow. You can easily integrate this into your preferred AI assistant so it inherently understands how to generate notebooks for you!
+This repository includes an `AutoNotebooks/` directory with a `SKILL.md` document loaded with YAML front-matter and explicit instructions on the NotebookLM automation workflow. You can easily integrate this into your preferred Agent so it inherently understands how to generate notebooks for you.
+
+### Claude Code
+
+Claude Code discovers skills from `SKILL.md` files organized in a `skills` directory. To integrate this skill:
+
+**Choose your installation location:**
+
+- **Global (all projects)**: `~/.claude/skills/`
+- **Per project**: `.claude/skills/`
+
+**Minimal setup:**
+
+```bash
+cp -r AutoNotebooks/ .claude/skills/
+```
+
+**Folder structure:**
+
+```
+.claude/skills/
+└── AutoNotebooks/
+  ├── SKILL.md              # required
+  ├── scripts/              # optional helpers
+  │   └── nlm_runner.py
+  └── references/           # optional docs
+    └── utils/
+```
+
+Claude automatically discovers and loads the skill once `SKILL.md` is in place.
 
 ### Google Antigravity
 
@@ -112,23 +145,6 @@ Cursor uses Markdown Domain Configuration (`.mdc`) and rule files to understand 
   mv .cursor/rules/SKILL.md .cursor/rules/notebook-automation.mdc
   ```
 - **Quick Use**: Simply tag `@SKILL.md` in your Cursor Chat.
-
-### Claude Code
-
-Claude Code uses a `CLAUDE.md` file in the project directory for its primary memory and project guidelines. To integrate:
-
-- **Recommended**: Copy the skill to be Claude's default project instructions:
-  ```bash
-  mkdir -p .claude
-  cp SKILL.md .claude/CLAUDE.md
-  ```
-- **Portable (Self-Contained)**: Bundle the logic directly inside the `.claude/` folder:
-  ```bash
-  mkdir -p .claude
-  cp -r nlm_runner.py utils/ SKILL.md .claude/
-  mv .claude/SKILL.md .claude/CLAUDE.md
-  ```
-- **Alternative**: Reference the file in your prompt directly (e.g., _"Following @SKILL.md, create me a notebook..."_).
 
 ## Features
 

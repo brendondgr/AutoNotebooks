@@ -1,5 +1,5 @@
 ---
-name: NotebookAutomation
+name: AutoNotebooks
 description: A semi-skill for parallelized NotebookLM notebook creation and artifact generation through AI-User interaction.
 ---
 
